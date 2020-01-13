@@ -27,23 +27,80 @@ app.get('/', (req, res, next) => {
 
     let title = req.get('gameTitle');
 
-    let filters = req.get('gameFilters');
+    let platformFilters = `[${req.get('platformFilters')}]`;
 
-    console.log(filters);
+    let genreFilters = `[${req.get('genreFilters')}]`;
+
+    let reviewFilter = req.get('reviewFilter');
 
     const options = {
         headers: {
             'user-key': config.GAME_API_KEY
         }
     }
-    
-    axios.post('https://api-v3.igdb.com/games/', `search "${title}"; fields name, platforms; where platforms = [${filters}]; limit 50;`, options)
 
-        .then(function(response) {
+    let rawBody = '';
+    let where
+    let genreBody
+    let genreAnd
+    let platformBody
+    let platformAnd
+    let reviewBody
+
+    if (platformFilters == '[]' && genreFilters == '[]' && reviewFilter == 'null') {
+        where = ''
+    } else {
+        where = ' where'
+    }
+    if (platformFilters == '[]') {
+        platformBody = '';
+    } else {
+        platformBody = ` platforms = ${platformFilters} `
+    }
+
+    if (platformFilters !== '[]' && genreFilters !== '[]') {
+        platformAnd = '&';
+    } else {
+        platformAnd = '';
+    }
+
+    if (genreFilters !== '[]' && reviewFilter !== 'null') {
+        genreAnd = '&';
+    } else {
+        genreAnd = '';
+    }
+
+    if (platformFilters !== '[]' && reviewFilter !== 'null') {
+        genreAnd = '&';
+    } else {
+        genreAnd ='';
+    }
+
+    if (genreFilters == '[]') {
+        genreBody = '';
+    } else {
+        genreBody = ` genre = ${genreFilters} `
+    }
+    
+    if (reviewFilter == 'null') {
+        reviewBody = '';
+    } else {
+        reviewBody = ` rating > ${reviewFilter}`
+    }
+
+    axios.post('https://api-v3.igdb.com/games/', 
+    
+    `search "${title}"; fields name, platforms, genres;` 
+    + where + platformBody + platformAnd + genreBody + genreAnd + reviewBody + ';'
+    , options)
+
+        .then(response => console.log(response))
+
+        /* .then(function(response) {
             
             res.status(200).send(response.data);
 
-        })
+        }) */
         .catch(error => console.log(error))
 })
 
