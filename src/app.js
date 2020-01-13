@@ -21,10 +21,15 @@ app.use(cors())
 
 let corsOptions = {
     optionsSuccessStatus: 200,
-}
+};
+
 app.get('/', (req, res, next) => {
 
     let title = req.get('gameTitle');
+
+    let filters = req.get('gameFilters');
+
+    console.log(filters);
 
     const options = {
         headers: {
@@ -32,11 +37,11 @@ app.get('/', (req, res, next) => {
         }
     }
     
-    axios.post('https://api-v3.igdb.com/games/', `search "${title}"; fields name; limit 50;`, options)
+    axios.post('https://api-v3.igdb.com/games/', `search "${title}"; fields name, platforms; where platforms = [${filters}]; limit 50;`, options)
 
         .then(function(response) {
             
-            res.send(response.data);
+            res.status(200).send(response.data);
 
         })
         .catch(error => console.log(error))
