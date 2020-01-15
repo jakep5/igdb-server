@@ -17,7 +17,7 @@ var port = process.env.PORT || '8080';
 
 app.use(morgan(morganOption))
 app.use(helmet())
-app.use(cors())
+app.use(cors)
 
 let corsOptions = {
     optionsSuccessStatus: 200,
@@ -36,9 +36,6 @@ app.get('/', (req, res, next) => {
     const options = {
         headers: {
             'user-key': config.GAME_API_KEY,
-            "Access-Control-Allow-Headers": "gameTitle, platformFilters, genreFilters, reviewFilter",
-            "Access-Control-Allow-Origin": "https://game-galaxy.jakepagel1.now.sh",
-            "Access-Control-Allow-Methods": "GET,POST,DELETE,PATCH"
         }
     }
 
