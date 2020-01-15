@@ -117,23 +117,6 @@ app.get('/', (req, res, next) => {
         .catch(error => console.log(error))
 })
 
-
-/* app.get('/', (req, res, next) => {
-    fetch('https://api-v3.igdb.com/games', {
-        method: 'POST',
-        headers: {
-            'user-key': process.env.GAME_API_KEY,
-            'content-type': 'application/x-www-form-urlencoded'
-        },
-        body: `search ${req.headers.gameTitle}; fields name; limit 50;`
-    })
-    .then(res =>
-        (!res.ok)
-            ? res.send().then(e => Promise.reject(e))
-            : res.send('hello')
-    )
-}) */
-
 app.use(function errorHandler(error, req, res, next) {
     let response
     if (NODE_ENV === 'production') {
