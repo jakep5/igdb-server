@@ -109,13 +109,11 @@ app.get('/', (req, res, next) => {
     + where + platformBody + platformAnd + genreBody + genreAnd + reviewBody + finalSemi + ' limit 50;'
     , options)
 
-        .then(response => console.log(response))
-
-        /* .then(function(response) {
+        .then(function(response) {
             
             res.status(200).send(response.data);
 
-        }) */
+        })
         .catch(error => console.log(error))
 })
 
