@@ -35,7 +35,10 @@ app.get('/', (req, res, next) => {
 
     const options = {
         headers: {
-            'user-key': config.GAME_API_KEY
+            'user-key': config.GAME_API_KEY,
+            "Access-Control-Allow-Headers": "gameTitle, platformFilters, genreFilters, reviewFilter",
+            "Access-Control-Allow-Origin": "https://game-galaxy.jakepagel1.now.sh",
+            "Access-Control-Allow-Methods": "GET,POST,DELETE,PATCH"
         }
     }
 
