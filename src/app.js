@@ -17,14 +17,11 @@ var port = process.env.PORT || '8080';
 
 app.use(morgan(morganOption))
 app.use(helmet())
+app.use(cors())
 
-app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, gameTitle, platformFilters, genreFilters, reviewFilter");
-    next();
-});
+app.options('*', cors());
 
-app.get('/', (req, res, next) => {
+app.get('/', cors(), (req, res, next) => {
 
     let title = req.get('gameTitle');
 
