@@ -17,13 +17,14 @@ var port = process.env.PORT || '8080';
 
 app.use(morgan(morganOption))
 app.use(helmet())
-app.use(cors)
+app.use(cors())
 
 let corsOptions = {
     optionsSuccessStatus: 200,
+    origin: 'game-galaxy.jakepagel1.now.sh',
 };
 
-app.get('/', (req, res, next) => {
+app.get('/', cors(corsOptions), (req, res, next) => {
 
     let title = req.get('gameTitle');
 
