@@ -17,7 +17,6 @@ var port = process.env.PORT || '8080';
 
 app.use(morgan(morganOption))
 app.use(helmet())
-app.use(cors())
 
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
@@ -25,12 +24,7 @@ app.use(function(req, res, next) {
     next();
 });
 
-let corsOptions = {
-    optionsSuccessStatus: 200,
-    origin: 'http://game-galaxy.jakepagel1.now.sh',
-};
-
-app.get('/', cors(corsOptions), (req, res, next) => {
+app.get('/', (req, res, next) => {
 
     let title = req.get('gameTitle');
 
