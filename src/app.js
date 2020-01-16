@@ -19,6 +19,12 @@ app.use(morgan(morganOption))
 app.use(helmet())
 app.use(cors())
 
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
+
 let corsOptions = {
     optionsSuccessStatus: 200,
     origin: 'http://game-galaxy.jakepagel1.now.sh',
@@ -36,7 +42,7 @@ app.get('/', cors(corsOptions), (req, res, next) => {
 
     const options = {
         headers: {
-            'user-key': config.GAME_API_KEY,
+            'user-key': config.GAME_API_KEY,           
         }
     }
 
