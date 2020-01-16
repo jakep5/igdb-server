@@ -21,7 +21,7 @@ app.use(cors())
 
 let corsOptions = {
     optionsSuccessStatus: 200,
-    origin: 'game-galaxy.jakepagel1.now.sh',
+    origin: 'http://game-galaxy.jakepagel1.now.sh',
 };
 
 app.get('/', cors(corsOptions), (req, res, next) => {
