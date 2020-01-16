@@ -19,13 +19,17 @@ app.use(morgan(morganOption))
 app.use(helmet())
 app.use(cors())
 
-app.options('*', cors(), (req, res, next) => {
+let corsOptions = {
+    origin: 'https://game-galaxy.jakepagel1.now.sh'
+}
+
+app.options('*', cors(corsOptions), (req, res, next) => {
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, gameTitle, platformFilters, genreFilters, reviewFilter");
     next();
 });
 
-app.get('/', cors(), (req, res, next) => {
+app.get('/', cors(corsOptions), (req, res, next) => {
 
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, gameTitle, platformFilters, genreFilters, reviewFilter");
@@ -40,7 +44,7 @@ app.get('/', cors(), (req, res, next) => {
 
     const options = {
         headers: {
-            'user-key': config.GAME_API_KEY,           
+            'user-key': config.GAME_API_KEY,       
         }
     }
 
