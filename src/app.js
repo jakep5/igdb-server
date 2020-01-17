@@ -29,10 +29,10 @@ app.use(cors())
     next();
 }); */
 
-app.get('/', cors(corsOptions), (req, res, next) => {
+app.get('/',/*  cors(corsOptions) */ (req, res) => {
 
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, gameTitle, platformFilters, genreFilters, reviewFilter");
+    /* res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, gameTitle, platformFilters, genreFilters, reviewFilter"); */
 
     let title = req.get('gameTitle');
 
