@@ -13,21 +13,21 @@ const morganOption = (NODE_ENV === 'production')
     ? 'tiny'
     : 'common';
 
-var port = process.env.PORT || '8080';
+const port = process.env.PORT || '8080';
 
 app.use(morgan(morganOption))
 app.use(helmet())
 app.use(cors())
 
-let corsOptions = {
+/* let corsOptions = {
     origin: 'https://game-galaxy.jakepagel1.now.sh'
-}
+} */
 
-app.options('*', cors(corsOptions), (req, res, next) => {
+/* app.options('*', cors(corsOptions), (req, res, next) => {
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, gameTitle, platformFilters, genreFilters, reviewFilter");
     next();
-});
+}); */
 
 app.get('/', cors(corsOptions), (req, res, next) => {
 
