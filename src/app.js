@@ -5,15 +5,12 @@ const cors = require('cors')
 const helmet = require('helmet')
 const { NODE_ENV } = require('./config')
 const axios = require('axios')
-const config = require('./config')
 
 const app = express()
 
 const morganOption = (NODE_ENV === 'production')
     ? 'tiny'
     : 'common';
-
-const port = process.env.PORT || '8080';
 
 app.use(morgan(morganOption))
 app.use(helmet())
