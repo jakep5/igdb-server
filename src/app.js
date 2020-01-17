@@ -44,7 +44,7 @@ app.get('/',/*  cors(corsOptions) */ (req, res) => {
 
     const options = {
         headers: {
-            'user-key': config.GAME_API_KEY,       
+            'user-key': process.env.GAME_API_KEY,       
         }
     }
 
